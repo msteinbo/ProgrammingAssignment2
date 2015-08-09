@@ -56,7 +56,7 @@ cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
       cached_inverse <- x$get_inverse_matrix()
       if(is.null(cached_inverse)) {
-            # In case the cache is still empty it needs to be set
+            # In case the cache is still empty ... cache needs to be set
             # with the inverse of the given matrix
 
             message("Cache still empy... inverse to be computed and stored")
@@ -75,29 +75,3 @@ cacheSolve <- function(x, ...) {
       cached_inverse
 }
 
-makeVector <- function(x = numeric()) {
-      m <- NULL
-      set <- function(y) {
-            x <<- y
-            m <<- NULL
-      }
-      get <- function() x
-      setmean <- function(mean) m <<- mean
-      getmean <- function() m
-      list(set = set, get = get,
-           setmean = setmean,
-           getmean = getmean)
-}
-
-
-cachemean <- function(x, ...) {
-      m <- x$getmean()
-      if(!is.null(m)) {
-            message("getting cached data")
-            return(m)
-      }
-      data <- x$get()
-      m <- mean(data, ...)
-      x$setmean(m)
-      m
-}
